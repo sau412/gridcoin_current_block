@@ -39,8 +39,6 @@ function grc_rpc_block($hash) {
         return $data->result;
 }
 
-
-
 // Get balance
 $info=grc_rpc_get_info();
 $block=$info->blocks;
@@ -56,9 +54,15 @@ $version=$blockinfo->ClientVersion;
 $cpid=$blockinfo->CPID;
 $mint=$blockinfo->mint;
 $interest=$blockinfo->Interest;
-//var_dump($blockinfo);
 
 echo <<<_END
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Current Gridcoin Block</title>
+</head>
+<body>
 <center style='valign:middle;'>
 <p>Current Gridcoin block</p>
 <h1 style='font-size:1000%'>$block</h1>
@@ -69,6 +73,8 @@ setTimeout(function() {
   location.reload();
 }, 10000);
 </script>
+</body>
+</html>
 _END;
 
 ?>
