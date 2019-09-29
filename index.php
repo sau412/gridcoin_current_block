@@ -66,7 +66,10 @@ echo <<<_END
 <center style='valign:middle;'>
 <p>Current Gridcoin block</p>
 <h1 style='font-size:1000%'>$block</h1>
-<p>Staked by <b>$address</b> (CPID <b>$cpid</b>)</p><p>Client version <b>$version</b></p><p>Mint <b>$mint</b> GRC interest <b>$interest</b> GRC</p><p>Current difficulty <b>$difficulty</b></p>
+<p>Staked by <b>$address</b> (CPID <b>$cpid</b>)</p>
+<p>Client version <b>$version</b></p>
+<p>Mint <b>$mint</b> GRC interest <b>$interest</b> GRC</p>
+<p>Current difficulty <b>$difficulty</b></p>
 </center>
 <script>
 setTimeout(function() {
