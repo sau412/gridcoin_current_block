@@ -1,16 +1,16 @@
 <?php
-// Gridcoinresearch show current block
+// Gridcoinresearch show current block info
 require_once("settings.php");
 
 // Send query to gridcoin client
 function grc_rpc_send_query($query) {
         global $grc_rpc_host,$grc_rpc_port,$grc_rpc_login,$grc_rpc_password;
         $ch=curl_init("http://$grc_rpc_host:$grc_rpc_port");
-//echo "http://$grc_rpc_host:$grc_rpc_port\n";
+
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,TRUE);
         curl_setopt($ch,CURLOPT_POST,TRUE);
         curl_setopt($ch,CURLOPT_USERPWD,"$grc_rpc_login:$grc_rpc_password");
-//echo "$grc_rpc_login:$grc_rpc_password\n";
+
         curl_setopt($ch, CURLOPT_POSTFIELDS,$query);
         $result=curl_exec($ch);
         curl_close($ch);
@@ -43,18 +43,18 @@ function grc_rpc_block($hash) {
 $info=grc_rpc_get_info();
 $block=$info->blocks;
 $difficulty=$info->difficulty->{"proof-of-stake"};
+
+// Get current block hash
 $blockhash_info=grc_rpc_block_hash($block);
-
-//$blockhash=$blockhash_info->hash;
-//var_dump($blockhash_info);
+// Get current block info
 $blockinfo=grc_rpc_block($blockhash_info);
-
 $address=$blockinfo->GRCAddress;
 $version=$blockinfo->ClientVersion;
 $cpid=$blockinfo->CPID;
 $mint=$blockinfo->mint;
 $interest=$blockinfo->Interest;
 
+// Template with results
 echo <<<_END
 <!DOCTYPE html>
 <html>
