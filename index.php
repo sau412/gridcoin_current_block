@@ -60,6 +60,7 @@ echo <<<_END
 <html>
 <head>
 <meta charset="UTF-8"/>
+<meta name="format-detection" content="telephone=no">
 <title>Current Gridcoin Block</title>
 </head>
 <body>
