@@ -71,6 +71,7 @@ echo <<<_END
 <p>Client version <b>$version</b></p>
 <p>Mint <b>$mint</b> GRC interest <b>$interest</b> GRC</p>
 <p>Current difficulty <b>$difficulty</b></p>
+<p><img src='https://arikado.xyz/counter/?site=$project_counter_name'></p>
 </center>
 <script>
 setTimeout(function() {
