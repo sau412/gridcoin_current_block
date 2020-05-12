@@ -11,10 +11,10 @@
 <center style='valign:middle;'>
 <p>Current Gridcoin block</p>
 <h1 style='font-size:1000%' id=block>Loading...</h1>
-<p>Staked by <b id=staked_by>SF37NJYuyT18n6vqD9Kb4f2WiCxLoB5gmz</b> (CPID <b id=cpid>INVESTOR</b>)</p>
-<p>Client version <b id=client_version>v4.0.6.0-g8a58edaed</b></p>
-<p>Mint <b id=mint>10.0003</b></p>
-<p>Current difficulty <b id=difficulty>9.3990519691445</b></p>
+<p>Staked by <b id=staked_by>nobody</b> (CPID <b id=cpid>none</b>)</p>
+<p>Client version <b id=version>none</b></p>
+<p>Mint <b id=mint>none</b></p>
+<p>Current difficulty <b id=difficulty>none</b></p>
 <p><img src='https://arikado.xyz/counter/?site=gridcoin_current_block'></p>
 </center>
 <script>
@@ -32,13 +32,41 @@ function update_values() {
 				block = 'Error';
 				difficulty = 'Error';
 			}
-			$('#block').text(block);
-			$('#difficulty').text(difficulty);
+			
+			if($('#block').text() != block) {
+				$('#block').text(block);
+				$('#difficulty').text(difficulty);
+				update_block_info(block);
+			}
 			
 			setTimeout(function() {
 			  update_values();
 			}, 10000);
 		})
+}
+
+function update_block_info(block) {
+	let block;
+	
+	$.get('https://api.arikado.ru/grc.php?method=getblockhash&number=' + block,
+		function(data) {
+			hash = data;
+			$.get('https://api.arikado.ru/grc.php?method=getblock',
+				function(data) {
+					parsed_data = JSON.parse(data);
+					staked_by = parsed_data['GRCAddress'];
+					cpid = parsed_data['CPID'];
+					mint = parsed_data['mint'];
+					version = parsed_data['ClientVersion'];
+					
+					$('#staked_by').text(staked_by);
+					$('#cpid').text(cpid);
+					$('#mint').text(mint);
+					$('#version').text(version);
+				}
+			);
+		}
+	);
 }
 
 update_values();
