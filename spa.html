@@ -49,7 +49,7 @@ function update_block_info(block) {
 	$.get('https://api.arikado.ru/grc.php?method=getblockhash&number=' + block,
 		function(data) {
 			hash = data;
-			$.get('https://api.arikado.ru/grc.php?method=getblock',
+			$.get('https://api.arikado.ru/grc.php?method=getblock&hash=' + hash,
 				function(data) {
 					parsed_data = JSON.parse(data);
 					staked_by = parsed_data['GRCAddress'];
