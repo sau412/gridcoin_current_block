@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="format-detection" content="telephone=no">
+<title>Current Gridcoin Block</title>
+<script src='jquery-3.3.1.min.js'></script>
+</head>
+<body>
+<center style='valign:middle;'>
+<p>Current Gridcoin block</p>
+<h1 style='font-size:1000%' id=block>Loading...</h1>
+<p>Staked by <b id=staked_by>SF37NJYuyT18n6vqD9Kb4f2WiCxLoB5gmz</b> (CPID <b id=cpid>INVESTOR</b>)</p>
+<p>Client version <b id=client_version>v4.0.6.0-g8a58edaed</b></p>
+<p>Mint <b id=mint>10.0003</b></p>
+<p>Current difficulty <b id=difficulty>9.3990519691445</b></p>
+<p><img src='https://arikado.xyz/counter/?site=gridcoin_current_block'></p>
+</center>
+<script>
+
+function update_values() {
+	$.get('https://api.arikado.ru/grc.php?method=getmininginfo',
+		function(data){
+			let block, difficulty;
+			try {
+				let parsed_data = JSON.parse(data);
+				block = parsed_data.blocks;
+				difficulty = parsed_data['difficulty']['proof-of-stake'];
+			}
+			catch {
+				block = 'Error';
+				difficulty = 'Error';
+			}
+			$('block').text(block);
+			$('difficulty').text(difficulty);
+			
+			setTimeout(function() {
+			  update_values();
+			}, 10000);
+		})
+}
+
+update_values();
+</script>
+</body>
+</html>
