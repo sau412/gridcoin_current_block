@@ -42,12 +42,10 @@ function update_values() {
 			setTimeout(function() {
 			  update_values();
 			}, 10000);
-		})
+		});
 }
 
 function update_block_info(block) {
-	let block;
-	
 	$.get('https://api.arikado.ru/grc.php?method=getblockhash&number=' + block,
 		function(data) {
 			hash = data;
