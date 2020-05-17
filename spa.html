@@ -48,8 +48,7 @@ function update_values() {
 function update_block_info(block) {
 	$.get('https://api.arikado.ru/grc.php?method=getblockhash&number=' + block,
 		function(data) {
-			hash = JSON.parse(data);
-			$.get('https://api.arikado.ru/grc.php?method=getblock&hash=' + hash,
+			$.get('https://api.arikado.ru/grc.php?method=getblock&hash=' + data,
 				function(data) {
 					staked_by = data['GRCAddress'];
 					cpid = data['CPID'];
