@@ -24,12 +24,11 @@ function update_values() {
 		function(data){
 			let block, difficulty;
 			try {
-				let parsed_data = JSON.parse(data);
-				block = parsed_data.blocks;
-				difficulty = parsed_data['difficulty']['proof-of-stake'];
+				block = data.blocks;
+				difficulty = data['difficulty']['proof-of-stake'];
 			}
 			catch (e) {
-				console.log(data, e);
+				console.log(e);
 				block = 'Error';
 				difficulty = 'Error';
 			}
@@ -52,11 +51,10 @@ function update_block_info(block) {
 			hash = JSON.parse(data);
 			$.get('https://api.arikado.ru/grc.php?method=getblock&hash=' + hash,
 				function(data) {
-					parsed_data = JSON.parse(data);
-					staked_by = parsed_data['GRCAddress'];
-					cpid = parsed_data['CPID'];
-					mint = parsed_data['mint'];
-					version = parsed_data['ClientVersion'];
+					staked_by = data['GRCAddress'];
+					cpid = data['CPID'];
+					mint = data['mint'];
+					version = data['ClientVersion'];
 					
 					$('#staked_by').text(staked_by);
 					$('#cpid').text(cpid);
