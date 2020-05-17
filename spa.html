@@ -28,7 +28,8 @@ function update_values() {
 				block = parsed_data.blocks;
 				difficulty = parsed_data['difficulty']['proof-of-stake'];
 			}
-			catch {
+			catch (e) {
+				console.log(e);
 				block = 'Error';
 				difficulty = 'Error';
 			}
