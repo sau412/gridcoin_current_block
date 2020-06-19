@@ -26,6 +26,7 @@ function update_values() {
 			let block, difficulty;
 			try {
 				block = data.blocks;
+				difficulty = data.difficulty;
 			}
 			catch (e) {
 				console.log(e);
@@ -48,7 +49,7 @@ function update_values() {
 function update_block_info(block) {
 	$.get(api + '?method=getblockhash&number=' + block,
 		function(data) {
-			let hash = data['hash']
+			let hash = data;
 			$('#hash').text(hash);
 			
 			$.get(api + '?method=getblock&hash=' + data,
