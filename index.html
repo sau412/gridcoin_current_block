@@ -18,9 +18,10 @@
 <p><img src='https://arikado.xyz/counter/?site=gridcoin_current_block'></p>
 </center>
 <script>
+const api = "https://api.arikado.ru/grc.php";
 
 function update_values() {
-	$.get('https://api.arikado.ru/grc.php?method=getmininginfo',
+	$.get(api + '?method=getmininginfo',
 		function(data){
 			let block, difficulty;
 			try {
@@ -46,9 +47,9 @@ function update_values() {
 }
 
 function update_block_info(block) {
-	$.get('https://api.arikado.ru/grc.php?method=getblockhash&number=' + block,
+	$.get(api + '?method=getblockhash&number=' + block,
 		function(data) {
-			$.get('https://api.arikado.ru/grc.php?method=getblock&hash=' + data,
+			$.get(api + '?method=getblock&hash=' + data,
 				function(data) {
 					staked_by = data['GRCAddress'];
 					cpid = data['CPID'];
