@@ -26,7 +26,7 @@ function update_values() {
 			let block, difficulty;
 			try {
 				block = data.blocks;
-				difficulty = data['difficulty']['proof-of-stake'];
+				difficulty = data['difficulty']['current'];
 			}
 			catch (e) {
 				console.log(e);
@@ -52,9 +52,9 @@ function update_block_info(block) {
 			$.get(api + '?method=getblock&hash=' + data,
 				function(data) {
 					staked_by = data['GRCAddress'];
-					cpid = data['CPID'];
+					cpid = data['claim']['mining_id'];
 					mint = data['mint'];
-					version = data['ClientVersion'];
+					version = data['claim']['client_version'];
 					
 					$('#staked_by').text(staked_by);
 					$('#cpid').text(cpid);
