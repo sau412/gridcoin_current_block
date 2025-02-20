@@ -36,7 +36,7 @@ async function update_values() {
 	if(document.getElementById('block').innerText != block) {
 		document.getElementById('block').innerText = block;
 		document.getElementById('difficulty').innerText = difficulty;
-		update_block_info(block);
+		await update_block_info(block);
 	}
 
 	setTimeout(function() {
