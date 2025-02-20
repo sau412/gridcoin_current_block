@@ -11,7 +11,7 @@
 <p>Current Gridcoin block</p>
 <h1 style='font-size:1000%' id=block>Loading...</h1>
 <p>Staked by CPID <b id=cpid>none</b></p>
-<p>Client version <b id=version>none</b></p>
+<p>Size <b id=size>none</b>, tx count <b id=tx_count></b></p>
 <p>Mint <b id=mint>none</b></p>
 <p>Current difficulty <b id=difficulty>none</b></p>
 <p><img src='https://arikado.xyz/counter/?site=gridcoin_current_block'></p>
@@ -45,7 +45,7 @@ async function update_values() {
 }
 
 async function update_block_info(block) {
-	let cpid, mint, version;
+	let cpid, mint, size, tx_count;
 	try {
 		let response = await fetch(api + '?method=getblockhash&number=' + block);
 		let block_hash = await response.json();
@@ -54,18 +54,21 @@ async function update_block_info(block) {
 		let data = await response.json();
 		cpid = data['claim']['mining_id'];
 		mint = data['mint'];
-		version = data['claim']['client_version'];
+		size = data['size'];
+		tx_count = data['tx'].length;
 	}
 	catch(e) {
 		console.log(e);
 		cpid = "Error";
 		mint = "Error";
-		version = "Error";
+		size = "Error";
+		tx_count = "Error";
 	}
 
 	document.getElementById('cpid').innerText = cpid;
 	document.getElementById('mint').innerText = mint;
-	document.getElementById('version').innerText = version;
+	document.getElementById('size').innerText = size;
+	document.getElementById('tx_count').innerText = tx_count;
 }
 
 update_values();
