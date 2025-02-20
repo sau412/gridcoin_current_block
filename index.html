@@ -45,27 +45,24 @@ async function update_values() {
 }
 
 async function update_block_info(block) {
-	let staked_by, cpid, mint, version;
+	let cpid, mint, version;
 	try {
 		let response = await fetch(api + '?method=getblockhash&number=' + block);
 		let block_hash = await response.json();
 
 		response = await fetch(api + '?method=getblock&hash=' + block_hash);
 		let data = await response.json();
-		staked_by = data['GRCAddress'];
 		cpid = data['claim']['mining_id'];
 		mint = data['mint'];
 		version = data['claim']['client_version'];
 	}
 	catch(e) {
 		console.log(e);
-		staked_by = "Error";
 		cpid = "Error";
 		mint = "Error";
 		version = "Error";
 	}
 
-	document.getElementById('staked_by').innerText = staked_by;
 	document.getElementById('cpid').innerText = cpid;
 	document.getElementById('mint').innerText = mint;
 	document.getElementById('version').innerText = version;
