@@ -32,7 +32,7 @@ async function update_values() {
 		difficulty = data['difficulty']['current'];	
 
 		if(document.getElementById('block').innerText != block) {
-			document.title = "G " + blocks;
+			document.title = "G " + block;
 			document.getElementById('block').innerText = block;
 			document.getElementById('difficulty').innerText = difficulty;
 			await update_block_info(block);
