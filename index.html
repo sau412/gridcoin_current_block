@@ -24,19 +24,24 @@ async function update_values() {
 	try {
 		let response = await fetch(api + '?method=getmininginfo');
 		let data = await response.json();
+
+		if(typeof data['blocks'] === "undefined") {
+			throw "API returns no blocks";
+		}
 		block = data['blocks'];
 		difficulty = data['difficulty']['current'];	
+
+		if(document.getElementById('block').innerText != block) {
+			document.title = "G " + blocks;
+			document.getElementById('block').innerText = block;
+			document.getElementById('difficulty').innerText = difficulty;
+			await update_block_info(block);
+		}
 	}
 	catch (e) {
 		console.log(e);
 		block = 'Error';
 		difficulty = 'Error';
-	}
-
-	if(document.getElementById('block').innerText != block) {
-		document.getElementById('block').innerText = block;
-		document.getElementById('difficulty').innerText = difficulty;
-		await update_block_info(block);
 	}
 
 	setTimeout(function() {
